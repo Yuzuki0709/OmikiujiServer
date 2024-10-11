@@ -1,0 +1,39 @@
+openapi: '3.1.0'
+info:
+  title: OmikujiService
+  version: 1.0.0
+servers:
+  - url: https://example.com/api
+    description: 
+paths:
+  /omikuji:
+    get:
+      operationId: getOmikuji
+      summary: Get a random fortune
+      parameters:
+        - name: name
+          required: true
+          in: query
+          description: The name of the person to receive the fortune
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A personalized fortune result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OmikujiResult'
+
+components:
+  schemas:
+    OmikujiResult:
+      type: object
+      properties:
+        result:
+          type: string
+        message:
+          type: string
+      required:
+        - result
+        - message
